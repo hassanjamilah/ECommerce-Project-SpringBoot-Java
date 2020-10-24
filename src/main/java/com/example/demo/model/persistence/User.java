@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class User {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@JsonProperty
 	private long id;
 	
@@ -34,6 +34,13 @@ public class User {
 	public User(String username, String password) {
 		this.username = username;
 		this.password = password;
+	}
+
+	public User(long id, String username, String password) {
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.cart = cart;
 	}
 
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
