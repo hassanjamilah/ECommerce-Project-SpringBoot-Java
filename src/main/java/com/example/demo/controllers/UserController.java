@@ -74,6 +74,10 @@ public class UserController {
 		user.setCart(cart);
 		userRepository.save(user);
 		log.info("Finished saving the user");
+		ResponseEntity<User> response = ResponseEntity.ok(user);
+		if (response == null){
+			log.warn("Can not create new user");
+		}
 		return ResponseEntity.ok(user);
 	}
 
