@@ -42,7 +42,13 @@ public class UserController {
 		log.info("Find the user with id : "  + id);
 		return ResponseEntity.of(userRepository.findById(id));
 	}
-	
+
+
+	/**
+	 * This method id used to get the username
+	 * @param username
+	 * @return
+	 */
 	@GetMapping("/{username}")
 	public ResponseEntity<User> findByUserName(@PathVariable String username) {
 		log.info("Find the user with name : "  + username);
