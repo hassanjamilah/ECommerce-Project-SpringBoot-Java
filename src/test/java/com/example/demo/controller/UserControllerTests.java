@@ -71,7 +71,8 @@ public class UserControllerTests {
 
     @Test
     public void testByUserName(){
-        User user = new User(1L, "hassan","password");
+        User user = new User( "hassan","password");
+        user.setId(1L);
         when(userRepository.findByUsername("hassan")).thenReturn(user);
 
         ResponseEntity<User> response = userController.findByUserName("hassan");
