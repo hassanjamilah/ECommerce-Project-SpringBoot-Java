@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 
 import com.example.demo.model.persistence.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -9,24 +10,23 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
+
 import static java.util.Collections.emptyList;
 
 @Service
-@Transactional
 public class UserDetailsServieImpl implements UserDetailsService {
 
-    private UserRepository applicationUserRepository;
 
-    public UserDetailsServieImpl(UserRepository applicationUserRepository) {
-        this.applicationUserRepository = applicationUserRepository;
-    }
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        com.example.demo.model.persistence.User applicationUser = applicationUserRepository.findByUsername(username);
-        if (applicationUser == null) {
+        com.example.demo.model.persistence.User user = userRepository.findByUsername(username);
+        if (user == null) {
             throw new UsernameNotFoundException(username);
         }
-        return new User(applicationUser.getUsername(), applicationUser.getPassword(), emptyList());
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), Collections.emptyList());
     }
 }
