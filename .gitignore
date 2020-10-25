@@ -1,2 +1,4 @@
-app.log
-app_copy.log
+/.idea/
+/auth-course.iml
+/target/
+/.mvn/
